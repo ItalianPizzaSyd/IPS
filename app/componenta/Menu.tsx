@@ -6,7 +6,7 @@ function Menu() {
         <div className="grid md:grid-cols-2 gap-12 items-start">
           <div>
             <h2 className="font-serif text-3xl sm:text-4xl">Menu highlights</h2>
-            <p className="mt-3 text-stone-600">A rotating selection of classics and seasonal specials. Vegetarian and gluten‑free options available on request.</p>
+            <p className="mt-3 text-stone-600">A rotating selection of classics and seasonal specials. Vegetarian options available on request.</p>
             <ul className="mt-6 space-y-3 text-stone-800">
               {[
                 ["Margherita", "San Marzano, fior di latte, basil"],

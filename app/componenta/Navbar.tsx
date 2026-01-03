@@ -114,20 +114,20 @@ function Navbar() {
 
 
 
-  const  menuSettings = () =>{
-    return(
-                        <div  onClick={()=>setIsClick(!isClick)} className= {` cursor-pointer flex  md:inline-flex md:items-center md:border-0  text-xl mt-4 md:mt-0 hover:scale-125 hover:text-amber-500 transition-all `}>
-                          <button 
-                          // className=" flex items-center justify-center relative h-[30px] w-24 overflow-hidden rounded-xl px-3 transition-all before:absolute before:bottom-0 before:left-0 before:top-0 before:z-0 before:h-full before:w-0 before:bg-sky-500 before:transition-all ease-in before:duration-700 hover:text-white hover:before:w-full"
-                          >
-                            <span className="flex relative z-10">
-                            <IoIosSettings 
-                              className={ isClick?`rotate-90 text-cyan-500 transition-all ease-in` : ` rotate-180 transition-all ease-in`} size={35} />
-                            </span>
-                          </button>
-                        </div>
-    )
-  }
+  // const  menuSettings = () =>{
+  //   return(
+  //                       <div  onClick={()=>setIsClick(!isClick)} className= {` cursor-pointer flex  md:inline-flex md:items-center md:border-0  text-xl mt-4 md:mt-0 hover:scale-125 hover:text-amber-500 transition-all `}>
+  //                         <button 
+  //                         // className=" flex items-center justify-center relative h-[30px] w-24 overflow-hidden rounded-xl px-3 transition-all before:absolute before:bottom-0 before:left-0 before:top-0 before:z-0 before:h-full before:w-0 before:bg-sky-500 before:transition-all ease-in before:duration-700 hover:text-white hover:before:w-full"
+  //                         >
+  //                           <span className="flex relative z-10">
+  //                           <IoIosSettings 
+  //                             className={ isClick?`rotate-90 text-cyan-500 transition-all ease-in` : ` rotate-180 transition-all ease-in`} size={35} />
+  //                           </span>
+  //                         </button>
+  //                       </div>
+  //   )
+  // }
 
   
   return (
@@ -203,7 +203,7 @@ function Navbar() {
         <Link
           href="#contact"
           className= {isOpen? `md:inline-flex items-center text-white  bg-gray-700 border-0 py-1 px-3 transition-all ease-in focus:outline-none hover:bg-red-700 rounded text-base mt-4 md:mt-0` 
-                    :  ` hidden md:inline-flex items-center ml-5 bg-cyan-500 border-0 py-1 px-3 transition-all ease-in focus:outline-none hover:bg-red-700 rounded text-lg mt-4 md:mt-0 hover:animate-pulse ` }>
+                    :  ` hidden md:inline-flex items-center ml-5 border-rose-500 border py-1 px-3 transition-all ease-in focus:outline-none hover:bg-red-700 rounded text-lg text-amber mt-4 md:mt-0 hover:text-white ` }>
           Contact
         </Link>          
 
