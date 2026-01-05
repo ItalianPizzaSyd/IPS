@@ -6,7 +6,7 @@ function WrappedHero({heroProp}:any) {
   return (
     <>
 
-    <section className="relative isolate overflow-hidden">
+    <section id='home' className="relative isolate overflow-hidden">
         <div className="absolute inset-0 -z-10">
           {/* Replace with your wood-fired hero image */}
           <Image height={1000} width={1000} src={heroProp.image} alt="Wood-fired pizza from our mobile oven" className="h-full w-full object-cover opacity-90" />

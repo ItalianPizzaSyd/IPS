@@ -4,6 +4,7 @@ export interface JobsResponse {
     subtitle: string;
     description: string;
     image: string;
+    reviews :any
   }
 
   

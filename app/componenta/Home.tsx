@@ -1,5 +1,3 @@
-import Image from 'next/image'
-import React from 'react'
 import WrappedHero from './wrapped/WrappedHero'
 export const dynamic = 'force-dynamic'
 import { SkillsResponse } from '../types/dataTypes';
@@ -12,7 +10,7 @@ const getHero = async (): Promise<SkillsResponse> => {
 };
 
 
-async function  Hero() {
+async function  Home() {
   const hero = await getHero()
   return (
     <>
@@ -21,4 +19,4 @@ async function  Hero() {
   )
 }
 
-export default Hero
+export default Home
