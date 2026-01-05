@@ -131,8 +131,8 @@ function Navbar() {
 
   
   return (
-    <header  className = { isOpen?` p-3 transition-all duration-500 ease-in-out bg-slate-900   sticky top-0 z-10  ` : 
-                                  `transition-all duration-500 ease-in-out h-20 flex items-center md:bg-slate-100 text-white md:text-black bg-slate-900 sticky top-0 z-10`}>
+    <header  className = { isOpen?` p-2 transition-all duration-500 ease-in-out bg-slate-100  text-black  sticky top-0 z-10  ` : 
+                                  `transition-all duration-500 ease-in-out h-20 flex items-center bg-slate-100  text-black  sticky top-0 z-10`}>
 
         <div className={isOpen ? ` min-h-96 transition-all ease-in-out duration-300  container mx-auto flex  p-3 flex-col  md:flex-row justify-around items-center md:justify-start` :
                                  ` h-24 transition-all ease-in-out duration-200  container mx-auto flex  p-3 flex-col  md:flex-row justify-between items-center md:justify-start`}>
@@ -140,15 +140,15 @@ function Navbar() {
         <div className='flex flex-row w-full md:w-auto justify-between items-center m-2 md:p-0'>
                 
                   <Image
-                  alt="italian garden logo"
-                  className="w-12 h-12"
-                  src='/assets/pizzaSlice.webp'
-                  width={50}
-                  height={50}
+                  alt="italian pizza catering logo"
+                  className="w-16 h-12 md:w-20 md:h-14"
+                  src='/assets/wep_files/logo.png'
+                  width={100}
+                  height={100}
                   /> 
                 
                 <p className="title-font font-medium md:mb-0">
-                  <Link href="#home" className="ml-3 text-md sm:text-3xl font-semibold">
+                  <Link href="#home" className="ml-2 text-md sm:text-3xl font-semibold">
                      Italian Pizza Sydney
                   </Link>
                 </p>
@@ -156,7 +156,7 @@ function Navbar() {
                 <button className= {isOpen? `ml-20 flex rotate-180 md:hidden text-sky-500 transition-all ease-in duration-200`:`ml-20 hover:bg-sky-900 p-2 rounded-full rotate-0 flex md:hidden text-white transition-all ease-in `  }
                         onClick={()=>(setIsOpen(!isOpen) ,setIsClick(false))}
                 >
-                { isOpen ? <IoMdClose size={30} /> :   <FaBars size={25} />}  
+                { isOpen ? <IoMdClose size={30} /> :   <FaBars size={25} color='black'/>}  
                 </button>
 
                 

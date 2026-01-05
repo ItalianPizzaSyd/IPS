@@ -5,9 +5,9 @@ function WrappedAbout({aboutProp}:any) {
     console.log(aboutProp.image)
   return (
      <section id="about" className="bg-white border-y border-stone-200">
-        <div className="mx-auto max-w-7xl px-4 py-16 grid md:grid-cols-2 gap-10 items-center">
+        <div className="mx-auto max-w-7xl h-[60vh] px-4 py-16 grid md:grid-cols-2 gap-10 items-center">
           <div>
-            <Image src={aboutProp.image} height={500} width={500} alt="Our pizzaiolo by the oven" className="rounded-2xl border border-stone-200 w-full object-cover h-72"/>
+            <Image src={aboutProp.image} height={500} width={500} alt="Our pizzaiolo by the oven" className="rounded-2xl border border-stone-200 w-full object-cover h-96"/>
           </div>
           <div>
             <h2 className="font-serif text-3xl sm:text-4xl">Tradition, fire and good company</h2>
