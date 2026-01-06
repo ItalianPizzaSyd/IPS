@@ -3,8 +3,8 @@ import React from 'react'
 function Menu() {
   return (
     <section id="menu" className="mx-auto max-w-7xl px-4 py-20">
-        <div className="grid md:grid-cols-2 gap-12 items-start">
-          <div className=' md:h-[55vh]'>
+        <div className="grid md:grid-cols-2 gap-12 items-start md:h-[55vh]">
+          <div className=''>
             <h2 className="font-serif text-3xl sm:text-4xl">Menu highlights</h2>
             <p className="mt-3 text-stone-300">A rotating selection of classics and seasonal specials. Vegetarian options available on request.</p>
             <ul className="mt-6 space-y-3 text-stone-200">
@@ -23,6 +23,7 @@ function Menu() {
                 </li>
               ))}
             </ul>
+            <a href="#menu" className=" mt-16 ml-6 inline-flex items-center rounded-2xl px-6 py-3 bg-white/90 text-stone-900 hover:bg-white">View menu</a>
           </div>
           <div className="grid grid-cols-2 gap-4">
             {/* Replace with real dish images */}
