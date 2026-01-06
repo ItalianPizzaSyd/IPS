@@ -2,7 +2,7 @@ import React from 'react'
 
 function Gallery() {
   return (
-     <section id="gallery" className="mx-auto max-w-7xl h-[85vh] px-4 py-16">
+     <section id="gallery" className="mx-auto max-w-7xl md:h-[85vh] px-4 py-16">
         <div className="flex items-end justify-between">
           <h2 className="font-serif text-3xl sm:text-4xl">Gallery</h2>
           <a href="#contact" className="text-sm underline underline-offset-4">Book your date →</a>
