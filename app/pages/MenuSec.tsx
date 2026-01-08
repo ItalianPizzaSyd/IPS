@@ -28,7 +28,7 @@ function MenuSec() {
           </div>
           <div className="grid grid-cols-2 gap-4">
             {/* Replace with real dish images */}
-            {["/assets/wep_files/pizzas (9).webp","/assets/cannoli-2.webp","/assets/hotchips.webp","/assets/arancini-3.webp"].map((src) => (
+            {["/pizzas(11).webp","/cannoli-2.webp","/hotchips.webp","/arancini-3.webp"].map((src) => (
               <Image height={500} width={500} key={src} src={src} alt="Pizza" className="rounded-2xl border border-stone-200 object-cover w-full h-40 sm:h-56"/>
             ))}
           </div>

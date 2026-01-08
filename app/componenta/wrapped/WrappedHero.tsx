@@ -3,7 +3,7 @@ import React from 'react'
 import Link from 'next/link'
 
 function WrappedHero({heroProp}:any) {
-    // console.log("HERO:", heroProp )
+    console.log("HERO:", heroProp ) 
   return (
     <>
       <section id='home' className="relative isolate overflow-hidden md:h-[80vh]">
