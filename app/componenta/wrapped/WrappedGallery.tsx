@@ -17,7 +17,7 @@ function WrappedGallery({galleryImg}:any) {
   return (
     <section id="gallery" className="mx-auto max-w-7xl md:h-[85vh] px-4 py-16">
             <div className="flex items-end justify-between">
-              <h2 className="font-serif text-3xl sm:text-4xl">Gallery</h2>
+              <h2 className="font-serif text-3xl sm:text-4xl text-stone-200">Gallery</h2>
               <Link href={'https://www.instagram.com/italianpizzasyd?igsh=NmxsOGVmeWQ2dXVv'} className=" underline underline-offset-4 text-stone-200 text-md">See More On Instagram Page →</Link>
             </div>
             <div className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4">

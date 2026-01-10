@@ -13,7 +13,7 @@ function MenuSec() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.4 }}
            className=''>
-            <h2 className="font-serif text-3xl sm:text-4xl">Menu highlights</h2>
+            <h2 className="font-serif text-3xl text-stone-200 sm:text-4xl">Menu highlights</h2>
             <p className="mt-3 text-stone-300">A rotating selection of classics and seasonal specials. Vegetarian options available on request.</p>
             <ul className="mt-6 space-y-3 text-stone-200">
               {[
@@ -40,7 +40,7 @@ function MenuSec() {
                     transition={{ duration: 0.8 }}
                      className="grid grid-cols-2 gap-4">
             {/* Replace with real dish images */}
-            {["/pizzas(11).webp","/cannoli-2.webp","/hotchips.webp","/arancini-3.webp"].map((src) => (
+            {["/pizzas (2).webp","/cannoli-2.webp","/hotchips.webp","/arancini2.webp"].map((src) => (
               <Image height={500} width={500} key={src} src={src} alt="Pizza" className="rounded-2xl border border-stone-200 object-cover w-full h-40 sm:h-56"/>
             ))}
           </motion.div>
