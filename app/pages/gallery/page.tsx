@@ -1,19 +1,23 @@
 import React from 'react'
 import Image from 'next/image'
+import WrappedGallery from '@/app/componenta/wrapped/WrappedGallery'
 
-function Gallery() {
+export const dynamic = 'force-dynamic'
+import { SkillsResponse } from '../../types/dataTypes';
+
+
+const getGallery = async (): Promise<SkillsResponse> => {
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL 
+  const response = await fetch(apiUrl+"/api/gallery",{ next: { revalidate: 36 } });
+  return await response.json();
+};
+
+async function Gallery() {
+  const gallery_image = await getGallery()
   return (
-     <section id="gallery" className="mx-auto max-w-7xl md:h-[85vh] px-4 py-16">
-        <div className="flex items-end justify-between">
-          <h2 className="font-serif text-3xl sm:text-4xl">Gallery</h2>
-          <a href="#contact" className="text-sm underline underline-offset-4">Book your date →</a>
-        </div>
-        <div className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4">
-          {["/g-1.jpg","/g-2.jpg","/g-3.jpg","/g-4.jpg","/g-5.jpg","/g-6.jpg","/g-7.jpg","/g-8.jpg,/g-4.jpg","/g-5.jpg","/g-6.jpg","/g-7.jpg","/g-8.jpg"].map((src,id) => (
-            <Image width={500} height={500} key={id} src={src} alt="Event" className="rounded-2xl border border-stone-200 object-cover w-full h-36 sm:h-48"/>
-          ))}
-        </div>
-      </section>
+     <>
+        <WrappedGallery galleryImg={gallery_image} />
+      </>
   )
 }
 

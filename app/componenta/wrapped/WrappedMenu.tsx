@@ -18,7 +18,7 @@ const links = await getLinkData()
     <div>
        <Navbar linksProp={links[1]}/>
       <section id="menu" className=" mx-auto max-full   px-4  py-9 md:flex 
-                                    md:bg-[left_100%_center] md:bg-[length:60%_auto]  md:bg-[url(/assets/bg-menu-2.png)] md:bg-no-repeat ">
+                                    md:bg-[left_100%_center] md:bg-[length:60%_auto]  md:bg-[url(/bg-menu-2.png)] md:bg-no-repeat ">
         <div className=" grid md:grid-cols-2 gap-12 items-start md:h-full md:pl-28 pl-10 ">
           <div className=''>
             <h2 className="font-serif text-3xl md:text-6xl">Menu</h2>

@@ -4,6 +4,7 @@ import {FaBars} from 'react-icons/fa'
 import {IoMdClose} from 'react-icons/io'
 import Image from 'next/image'
 import Link from 'next/link'
+import Social from './Social'
 
 export interface CONTEXT {
   isDarkMode?:boolean,
@@ -62,11 +63,11 @@ function Navbar({linksProp}:any) {
                 
                 <p className="title-font font-medium md:mb-0">
                   <Link href="#home" className="ml-2 text-md sm:text-3xl font-semibold">
-                     Italian Pizza Sydney
+                     Italian Pizza Catering
                   </Link>
                 </p>
                 
-                <button className= {isOpen? `ml-20 flex rotate-180 md:hidden text-sky-500 transition-all ease-in duration-200`:`ml-20 hover:bg-sky-900 p-2 rounded-full rotate-0 flex md:hidden text-white transition-all ease-in `  }
+                <button className= {isOpen? `ml-16 flex rotate-180 md:hidden text-sky-500 transition-all ease-in duration-200`:`ml-16 hover:bg-sky-900 p-2 rounded-full rotate-0 flex md:hidden text-white transition-all ease-in `  }
                         onClick={()=>(setIsOpen(!isOpen) ,setIsClick(false))}
                 >
                 { isOpen ? <IoMdClose size={30} /> :   <FaBars size={25} color='black'/>}  
@@ -88,15 +89,22 @@ function Navbar({linksProp}:any) {
            }
                  
         </nav>
-        {linksProp[0].isMenuPage ?  null :
         
-        <Link
-          onClick={()=>setIsOpen(false)}
-          href="#contact"
-          className= {isOpen? `md:inline-flex items-center text-white  bg-gray-700 border-0 py-1 px-3 transition-all ease-in focus:outline-none hover:bg-red-700 rounded text-base mt-4 md:mt-0` 
-                    :  ` hidden md:inline-flex items-center ml-5 border-rose-500 border py-1 px-3 transition-all ease-in focus:outline-none hover:bg-red-700 rounded text-lg text-amber mt-4 md:mt-0 hover:text-white ` }>
-          Contact
-        </Link>   }
+        {linksProp[0].isMenuPage ?  null :
+        <>
+        <div  className= {isOpen? `md:inline-flex items-center  py-1 px-3     mt-4 md:mt-0` 
+                      :  ` hidden md:inline-flex items-center ml-5  border py-1 px-3   text-amber mt-4 md:mt-0  ` }>
+          <Social/>
+        </div>
+          <Link
+            onClick={()=>setIsOpen(false)}
+            href="#contact"
+            className= {isOpen? `md:inline-flex items-center text-white  bg-gray-700 border-0 py-1 px-3 transition-all ease-in focus:outline-none hover:bg-red-700 rounded text-base mt-4 md:mt-0` 
+                      :  ` hidden md:inline-flex items-center ml-5 border-rose-500 border py-1 px-3 transition-all ease-in focus:outline-none hover:bg-red-700 rounded text-lg text-amber mt-4 md:mt-0 hover:text-white ` }>
+            Contact
+          </Link>  
+         </>
+         }
                 
 
         </div>

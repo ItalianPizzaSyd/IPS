@@ -20,7 +20,7 @@ function WrappedPackage({packProps}:any) {
               </div>
             ))}
           </div>
-           <div className="mx-auto max-w-7xl px-4 py-8 grid grid-cols-2 sm:grid-cols-5 gap-6 text-center text-md font-bold text-stone-700   ">
+           <div className="mx-auto max-w-7xl px-4 py-8 grid grid-cols-2 sm:grid-cols-5 gap-6 text-center text-md font-medium text-stone-700   ">
           {[
             "Insalate extra",
             "Waiter available for 200$ extra",
