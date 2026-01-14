@@ -4,7 +4,7 @@ import React, {useState} from 'react'
 import Swal from 'sweetalert2'
 import { validationSchema } from '../../validation/validation'
 import Terms from './Terms'
-import env from "react-dotenv";
+
 
 interface IForm{
   id:string;
