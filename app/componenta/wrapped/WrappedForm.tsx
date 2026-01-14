@@ -4,6 +4,7 @@ import React, {useState} from 'react'
 import Swal from 'sweetalert2'
 import { validationSchema } from '../../validation/validation'
 import Terms from './Terms'
+import env from "react-dotenv";
 
 interface IForm{
   id:string;
@@ -12,11 +13,11 @@ interface IForm{
   min?:string | any;
   max?:string | any;
 }
+ const webkey = process.env.NEXT_PUBLIC_WEB_KEY
+ console.log(webkey) 
 
-const webkey = process.env.webKey
-console.log(webkey)
 function WrappedFrom({formData}:any) {
-  
+
    
     const onSubmit = async (e:any) => {
       e.preventDefault();

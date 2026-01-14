@@ -6,7 +6,7 @@ function Footer() {
     <footer className="bg-stone-900 text-stone-100">
         <div className="mx-auto max-w-7xl px-4 py-10 grid md:grid-cols-4 gap-8">
           <div className="md:col-span-2">
-            <p className="font-serif text-xl">Italian Pizza Sydney</p>
+            <p className="font-serif text-xl">Italian Pizza Catering</p>
             <p className="mt-2 text-stone-300">Mobile wood‑fired pizza catering across Sydney.</p>
           </div>
           <div>
@@ -27,7 +27,7 @@ function Footer() {
         </div>
         <div className="border-t border-stone-700">
           <div className="mx-auto max-w-7xl px-4 py-4 text-sm text-stone-300 flex flex-wrap items-center justify-between gap-2">
-            <p>© {new Date().getFullYear()} Italian Pizza Sydney</p>
+            <p>© {new Date().getFullYear()} Italian Pizza Catering</p>
             <p>ABN: 51 687 754 034</p>
           </div>
         </div>

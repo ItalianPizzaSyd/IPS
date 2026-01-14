@@ -4,6 +4,8 @@ import "./globals.css";
 import { ThemeProvider } from "./ThemeProvider/ThemeProvider";
 import Navbar from "./componenta/Navbar";
 import Footer from "./componenta/Footer";
+import IframeGTM from "./GoogleTagManager/IframeGTM";
+import HeadScript from "./GoogleTagManager/HeadScript";
 export const dynamic = 'force-dynamic'
 
 const inter = Inter({ subsets: ["latin"] });
@@ -23,6 +25,8 @@ export default function RootLayout({
       <body className={inter.className}>
         {/* <ThemeProvider> */}
         {/* <Navbar/> */}
+         <HeadScript/>
+         <IframeGTM/>
           {children}
         <Footer/>
         {/* </ThemeProvider> */}

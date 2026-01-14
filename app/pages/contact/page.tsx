@@ -7,12 +7,12 @@ const getForm = async ():Promise<FormRespsonse> => {
   const res = await fetch(apiUrl+"/api/form",{next:{revalidate:36}})
   return  await res.json()
 }
-
+  
 async function Contact() {
   const form = await getForm()
   return (
     <>
-      <WrappedForm formData = {form} />
+      <WrappedForm formData = {form} /> 
     </>
   )
 }
