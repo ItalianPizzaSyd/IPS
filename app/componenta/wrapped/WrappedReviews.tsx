@@ -15,10 +15,8 @@ function WrappedReviews({reviews}:any) {
     },[reviews])
    
   return (
-<section id="reviews" className="text-stone-50 py-20" itemScope itemType="https://schema.org/LocalBusiness">
-            <meta itemProp="name" content="Italian Pizza Sydney" />
-
-
+<section id="reviews" className="text-stone-50 py-20">
+            
             <div className="max-w-8xl mx-auto px-10">
             {/* Aggregate rating */}
                 <motion.div
@@ -48,9 +46,7 @@ function WrappedReviews({reviews}:any) {
                             viewport={{ once: true }}
                             transition={{ duration: 0.5, delay: idx * 0.1 }}
                             className="bg-white rounded-2xl p-6 shadow-sm border border-stone-200"
-                            itemScope
-                            itemType="https://schema.org/Review"
-                        >
+                                                  >
                         <div className="flex items-center gap-4">
                             <div className="h-14 w-14 rounded-full bg-rose-600 text-white flex items-center justify-center font-semibold text-xl">
                             {review.initial}
@@ -59,12 +55,8 @@ function WrappedReviews({reviews}:any) {
                                 <p className="font-semibold" itemProp="author">{review.name}</p>
                                     <div
                                     className="flex"
-                                    itemProp="reviewRating"
-                                    itemScope
-                                    itemType="https://schema.org/Rating"
                                     >
-                                    <meta itemProp="ratingValue" content={String(review.stars)} />
-                                    <meta itemProp="bestRating" content="5" />
+                                    
                                     {[...Array(review.stars)].map((_, i) => (
                                     <Star key={i} className="h-5 w-5 text-yellow-400 fill-yellow-400" />
                                     ))}
@@ -73,7 +65,7 @@ function WrappedReviews({reviews}:any) {
                             </div>
 
 
-                        <p className="mt-4 text-stone-700 leading-relaxed" itemProp="reviewBody">
+                        <p className="mt-4 text-stone-700 leading-relaxed">
                         “{review.text}”
                         </p>
                         </motion.article>

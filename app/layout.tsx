@@ -32,21 +32,14 @@ export const metadata: Metadata = {
     siteName: "Italian Pizza Catering",
     locale: "en_AU",
     type: "website",
-    images: [
-      {
-        url: "https://www.italianpizzacatering.com.au/og-pizza.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Italian Pizza Catering Sydney",
-      },
-    ],
+    
   },
   twitter: {
     card: "summary_large_image",
     title: "Italian Pizza Catering Sydney | Pizza Italiana Autentica",
     description:
       "Pizza italiana autentica per eventi a Sydney. Catering premium con ingredienti italiani e impasto a lunga lievitazione.",
-    images: ["https://www.italianpizzacatering.com.au/og-pizza.jpg"],
+   
   },
   robots: {
     index: true,

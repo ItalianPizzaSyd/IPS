@@ -53,8 +53,8 @@ const handleNavClick = (path: string) => {
 };
   
   return (
-    <header  className = { isOpen?` p-2 transition-all duration-500 ease-in-out bg-zinc-900 text-white sticky top-0 z-10  ` : 
-                                  `transition-all duration-500 ease-in-out h-20 flex items-center bg-zinc-900  text-white  sticky top-0 z-10`}>
+    <header  className = { isOpen?` p-2 transition-all duration-500 ease-in-out bg-zinc-800 text-white sticky top-0 z-10  ` : 
+                                  `transition-all duration-500 ease-in-out h-20 flex items-center bg-zinc-800  text-white  sticky top-0 z-10`}>
 
         <div className={isOpen ? ` min-h-96 transition-all ease-in-out duration-300  container mx-auto flex  p-3 flex-col  md:flex-row justify-around items-center md:justify-start` :
                                  ` h-24 transition-all ease-in-out duration-200  container mx-auto flex  p-3 flex-col  md:flex-row justify-between items-center md:justify-start`}>
