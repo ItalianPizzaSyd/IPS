@@ -5,17 +5,24 @@ import Footer from "./componenta/Footer";
 import IframeGTM from "./GoogleTagManager/IframeGTM";
 import HeadScript from "./GoogleTagManager/HeadScript";
 import { GoogleTagManager } from "@next/third-parties/google";
+import JsonLd from "./componenta/JsonLd";
 
 
 const inter = Inter({ subsets: ["latin"] });
+export const viewport = {
+    width: "device-width",
+    initialScale: 1,
+  }
+
+
 
 export const metadata: Metadata = {
   title: {
-    default: "Italian Pizza Catering Sydney | Autentica Pizza Italiana per Eventi",
+    default: "Italian Pizza Catering Sydney |Pizza Italiana per Eventi",
     template: "%s | Italian Pizza Catering Sydney",
   },
   description:
-    "Italian Pizza Catering a Sydney per eventi privati e aziendali. Pizza italiana autentica, impasto a lunga fermentazione e ingredienti italiani premium. Catering per matrimoni, feste e corporate events. Prenota ora!",
+    "Italian Pizza Catering in Sydney for private and corporate events. Authentic Wood Fired  Italian Pizza, crafted in Sydney. Catering for weddings, parties and corporate events. Book now!",
   keywords: [
     "Italian pizza catering Sydney",
     "pizza catering Sydney",
@@ -26,7 +33,7 @@ export const metadata: Metadata = {
     "wedding pizza catering",
   ],
   openGraph: {
-    title: "Italian Pizza Catering Sydney – Autentica Pizza Italiana per Eventi",
+    title: "Italian Pizza Catering Sydney – Authentic Italian Pizza for Events",
     description:
       "Catering di pizza italiana autentica a Sydney. Perfetto per matrimoni, eventi aziendali e feste private. Ingredienti freschi e tradizione italiana.",
     url: "https://www.italianpizzacatering.com.au/",
@@ -55,6 +62,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://www.italianpizzacatering.com.au",
   },
+
 };
 
 export default function RootLayout({
@@ -71,6 +79,7 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
          {/* <IframeGTM/> */}
+         <JsonLd />
           {children}
         <Footer/>
       </body>

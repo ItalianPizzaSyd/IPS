@@ -27,4 +27,4 @@ function WrappedHero({heroProp}:any) {
   )
 }
 
-export default WrappedHero
+export default WrappedHero 
