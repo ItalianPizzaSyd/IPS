@@ -71,16 +71,16 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // const gtmId = process.env.NEXT_PUBLIC_GTM_ID;
+ 
   return (
     <html lang="en">
       <head>
         <HeadScript/>
-        {/* {gtmId && <GoogleTagManager gtmId={gtmId} />} */}
+        <JsonLd />
+      
       </head>
       <body className={inter.className}>
          <IframeGTM/>
-         <JsonLd />
           {children}
         <Footer/>
       </body>
