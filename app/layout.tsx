@@ -77,7 +77,6 @@ export default function RootLayout({
       <head>
         <HeadScript/>
         <JsonLd />
-      
       </head>
       <body className={inter.className}>
          <IframeGTM/>

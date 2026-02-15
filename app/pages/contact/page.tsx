@@ -1,6 +1,7 @@
 import React from 'react'
 import WrappedForm from '../../componenta/wrapped/WrappedForm';
 import { FormRespsonse } from '../../types/dataTypes';
+import IframeGTM from '../../GoogleTagManager/IframeGTM';
 
 const getForm = async ():Promise<FormRespsonse> => {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL ;
@@ -12,6 +13,7 @@ async function Contact() {
   const form = await getForm()
   return (
     <>
+      <IframeGTM />
       <WrappedForm formData = {form} /> 
     </>
   )
