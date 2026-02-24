@@ -75,10 +75,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <HeadScript/>
+        
         <JsonLd />
       </head>
       <body className={inter.className}>
+        <HeadScript/>
          <IframeGTM/>
           {children}
         <Footer/>
