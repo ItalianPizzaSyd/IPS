@@ -2,11 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Footer from "./componenta/Footer";
-import IframeGTM from "./GoogleTagManager/IframeGTM";
-import HeadScript from "./GoogleTagManager/HeadScript";
-// import { GoogleTagManager } from "@next/third-parties/google";
+import { GoogleTagManager } from "@next/third-parties/google";
 import JsonLd from "./componenta/JsonLd";
-// import Script from "next/script";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -28,7 +25,7 @@ export const metadata: Metadata = {
     "Italian pizza catering Sydney",
     "pizza catering Sydney",
     "authentic Italian pizza",
-    "pizza catering",
+    "pizza catering", 
     "event catering Sydney",
     "corporate catering pizza",
     "wedding pizza catering",
@@ -75,12 +72,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        
+        <GoogleTagManager gtmId="GTM-NLXNKSM6" />
         <JsonLd />
       </head>
       <body className={inter.className}>
-        <HeadScript/>
-         <IframeGTM/>
           {children}
         <Footer/>
       </body>
