@@ -75,7 +75,7 @@ export default function RootLayout({
       <head>
         <JsonLd />
         {/* <GoogleTagManager gtmId="GTM-NLXNKSM6" /> */}
-        {/* <GoogleAnalytics gaId="G-29BMJ1PT5L" /> */}
+        <GoogleAnalytics gaId="G-29BMJ1PT5L" />
         <Script id="gtm-psvmzxv8" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: `
           (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
           new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
