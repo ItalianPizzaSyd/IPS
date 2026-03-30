@@ -32,7 +32,7 @@ function WrappedReviews({reviews}:any) {
                     <Star key={i} className="h-6 w-6 text-yellow-400 fill-yellow-400" />
                     ))}
                 </div>
-                <p className="mt-2 text-stone-600">Based on 36 Google reviews</p>
+                <p className="mt-2 text-stone-600">Based on Google reviews</p>
                 </motion.div>
 
 
