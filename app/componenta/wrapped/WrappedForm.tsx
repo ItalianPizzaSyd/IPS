@@ -1,6 +1,6 @@
 'use client'
 import { FormRespsonse, VALUE, VAL } from '@/app/types/dataTypes'
-import React, {useState, useRef, useEffect} from 'react'
+import React, {useState, useRef, useEffect, useCallback} from 'react'
 import Swal from 'sweetalert2'
 import { validationSchema } from '../../validation/validation'
 import Terms from './Terms'
@@ -13,9 +13,29 @@ type FormField = {
   max?: number
 }
 
+type PackageOption = {
+  value: string
+  label: string
+}
+
 type WrappedFormProps = {
   formData?: FormRespsonse
+  packageOptions?: PackageOption[]
+  defaultPackageValue?: string
+  hidePackageSelector?: boolean
+  formId?: string
 }
+
+const defaultPackageOptions: PackageOption[] = [
+  { value: 'packA', label: 'Pack A' },
+  { value: 'packB', label: 'Pack B' },
+  { value: 'packC', label: 'Pack C' },
+  { value: 'packD', label: 'Pack D' },
+  { value: 'kitchenMenu', label: 'Kitchen Menu' },
+  { value: 'specialPack', label: 'Special Pack' }
+]
+
+const termsConsentText = 'I have read and I consent'
 
 const formFields: FormField[] = [
   { id: 'name', name: 'name', type: 'text' },
@@ -28,56 +48,65 @@ const formFields: FormField[] = [
   { id: 'numberOfKidsUnder10', name: 'numberOfKidsUnder10', type: 'number', min: 0 }
 ]
 
-const WrappedForm: React.FC<WrappedFormProps> = ({ formData }) => {
+const WrappedForm: React.FC<WrappedFormProps> = ({
+  formData,
+  packageOptions = defaultPackageOptions,
+  defaultPackageValue = '',
+  hidePackageSelector = false,
+  formId
+}) => {
   const formRef = useRef<HTMLFormElement | null>(null)
   const [messagePrefill, setMessagePrefill] = useState('')
   const [packPrefill, setPackPrefill] = useState('')
 
-  useEffect(() => {
-    if (formData?.name) {
-      setMessagePrefill((prev) => prev || formData.name)
-    }
-  }, [formData])
-
-  useEffect(()=>{
-    try{
-      if(formRef.current) formRef.current.reset()
+  const hydrateCartPrefill = useCallback(() => {
+    try {
+      if (formRef.current) {
+        formRef.current.reset()
+      }
 
       const saved = localStorage.getItem('kitchen_cart_message')
-      if(saved){
+      if (saved) {
         setMessagePrefill(saved)
         localStorage.removeItem('kitchen_cart_message')
-        // also cleanup any remaining kitchen_ keys to avoid double-appending
-        try{
-          Object.keys(localStorage).forEach((k)=>{
-            if(typeof k === 'string' && k.startsWith('kitchen_')){
+        try {
+          Object.keys(localStorage).forEach((k) => {
+            if (typeof k === 'string' && k.startsWith('kitchen_')) {
               localStorage.removeItem(k)
             }
           })
-        }catch(err){}
+        } catch (err) {}
         return
       }
 
       const packSaved = localStorage.getItem('kitchen_cart_pack')
-      if(packSaved){
+      if (packSaved) {
         setPackPrefill(packSaved)
         localStorage.removeItem('kitchen_cart_pack')
       } else {
         if (typeof window !== 'undefined') {
-          try{
+          try {
             const params = new URLSearchParams(window.location.search)
             const q = params.get('pack')
-            if(q) setPackPrefill(q)
-          }catch(e){}
+            if (q) {
+              setPackPrefill(q)
+            } else if (defaultPackageValue) {
+              setPackPrefill(defaultPackageValue)
+            }
+          } catch (e) {
+            if (defaultPackageValue) setPackPrefill(defaultPackageValue)
+          }
+        } else if (defaultPackageValue) {
+          setPackPrefill(defaultPackageValue)
         }
       }
 
       const raw = localStorage.getItem('kitchen_cart')
-      if(raw){
+      if (raw) {
         const items = JSON.parse(raw)
-        if(Array.isArray(items) && items.length){
+        if (Array.isArray(items) && items.length) {
           let total = 0
-          const lines = items.map((it:any)=>{
+          const lines = items.map((it: any) => {
             const unit = Number(it.price) || 0
             const qty = Number(it.qty) || 1
             const lineTotal = unit * qty
@@ -88,28 +117,54 @@ const WrappedForm: React.FC<WrappedFormProps> = ({ formData }) => {
           const summaryLines = [
             '--- Catering Cart Summary ---',
             'Items:',
-            ...lines.map(l => `• ${l}`),
+            ...lines.map((l) => `• ${l}`),
             `Subtotal: $${total.toFixed(2)}`,
             '',
             'Please include the cart above in my enquiry. Thank you.'
           ]
 
-          setMessagePrefill(prev => prev ? prev + '\n\n' + summaryLines.join('\n') : summaryLines.join('\n'))
+          setMessagePrefill((prev) => (prev ? prev + '\n\n' + summaryLines.join('\n') : summaryLines.join('\n')))
 
-          // cleanup kitchen-related localStorage now that we've captured the message
-          try{
-            if(typeof window !== 'undefined' && window.localStorage){
-              Object.keys(localStorage).forEach((k)=>{
-                if(typeof k === 'string' && k.startsWith('kitchen_')){
+          try {
+            if (typeof window !== 'undefined' && window.localStorage) {
+              Object.keys(localStorage).forEach((k) => {
+                if (typeof k === 'string' && k.startsWith('kitchen_')) {
                   localStorage.removeItem(k)
                 }
               })
             }
-          }catch(err){ /* ignore */ }
+          } catch (err) {}
         }
       }
-    }catch(e){ }
-  },[])
+    } catch (e) {}
+  }, [defaultPackageValue])
+
+  useEffect(() => {
+    if (formData?.name) {
+      setMessagePrefill((prev) => prev || formData.name)
+    }
+  }, [formData])
+
+  useEffect(() => {
+    hydrateCartPrefill()
+  }, [hydrateCartPrefill])
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+
+    const handleHashChange = () => {
+      if (window.location.hash === '#kitchen-form') {
+        hydrateCartPrefill()
+      }
+    }
+
+    window.addEventListener('kitchen-cart-checkout', hydrateCartPrefill)
+    window.addEventListener('hashchange', handleHashChange)
+    return () => {
+      window.removeEventListener('kitchen-cart-checkout', hydrateCartPrefill)
+      window.removeEventListener('hashchange', handleHashChange)
+    }
+  }, [hydrateCartPrefill])
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -152,7 +207,11 @@ const WrappedForm: React.FC<WrappedFormProps> = ({ formData }) => {
         mode: 'cors',
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({ access_key: webkey, ...formData })
+        body: JSON.stringify({
+          access_key: webkey,
+          ...formData,
+          terms: formData.terms ? termsConsentText : ''
+        })
       })
 
       const result = await response.json()
@@ -174,7 +233,7 @@ const WrappedForm: React.FC<WrappedFormProps> = ({ formData }) => {
 
   return (
     <>
-     <section  className="mx-auto max-w-3xl px-4 py-16">
+     <section id={formId} className="mx-auto max-w-3xl px-4 py-16">
         <div className="rounded-2xl border border-stone-200 bg-white p-6 shadow-sm">
           <h2 className="font-serif text-3xl">Request a quote</h2>
           <p className="mt-2 text-stone-700">Tell us about your event—date, location, number of guests, dietary needs—and we will get back to you quickly.</p>
@@ -198,21 +257,24 @@ const WrappedForm: React.FC<WrappedFormProps> = ({ formData }) => {
               <span>Message</span>
               <textarea name="message" rows={6} value={messagePrefill} onChange={(e)=>setMessagePrefill(e.target.value)} className="rounded-xl border border-stone-300 px-3 py-2 outline-none focus:ring-2 focus:ring-rose-500"/>
             </label>
-             <div className="rounded-xl border border-stone-300 px-3 py-2 outline-none focus:ring-2 focus:ring-rose-500">
-              <label htmlFor="pack">Select package</label>
-                <select className='' name='pack' id='pack' required value={packPrefill} onChange={(e)=>setPackPrefill(e.target.value)}>
-                  <option value="">---</option>
-                  <option value="packA">pack A</option>
-                  <option value="packB">pack B</option>
-                  <option value="packC">pack C</option>
-                  <option value="packD">pack D</option>
-                  <option value="kitchenMenu">kitchen menu</option>
-                  <option value="specialPack">special pack</option>
-                </select>
-          </div>
+            {!hidePackageSelector ? (
+              <div className="rounded-xl border border-stone-300 px-3 py-2 outline-none focus:ring-2 focus:ring-rose-500">
+                <label htmlFor="pack">Select package</label>
+                  <select className='' name='pack' id='pack' required value={packPrefill} onChange={(e)=>setPackPrefill(e.target.value)}>
+                    <option value="">---</option>
+                    {packageOptions.map((option) => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </select>
+              </div>
+            ) : (
+              <input type="hidden" name="pack" value={packPrefill || defaultPackageValue || 'kitchenMenu'} />
+            )}
           <div className="rounded-xl flex gap-4 px-3 py-2 outline-none focus:ring-2 focus:ring-rose-500">
-            <label htmlFor="termsAndCondition">I Read Terms and Condition</label>
-            <input id='terms' name="terms" type="checkbox" required />
+            <label htmlFor="terms">I have read and I consent</label>
+            <input id='terms' name="terms" type="checkbox" value={termsConsentText} required />
           </div>
             <div className="sm:col-span-2">
               <button type="submit" className="w-full sm:w-auto rounded-2xl bg-rose-600 px-6 py-3 text-white shadow hover:shadow-lg">Send enquiry</button>

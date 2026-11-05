@@ -9,6 +9,7 @@ function Terms() {
             <li className="mt-4 space-y-2 text-stone-700" >*Deposit are not refundable </li>
             <li className="mt-4 space-y-2 text-stone-700" >*Menu selection and final guest numbers must be confirmed a week prior the event </li>
             <li className="mt-4 space-y-2 text-stone-700" >*Balance must be paid before the event starts</li>           
+            <li className="mt-4 space-y-2 text-stone-700" >*For kitchen only orders, flat delivery fee (sydney area) 25$</li>           
         </ul>
     </div>
   )

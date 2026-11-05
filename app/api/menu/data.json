@@ -66,8 +66,16 @@
       "title":"Ian"
     },
     {
-      "ingredients":"Tomato, mozzarella, prawn, olives, capers, fresh tomato",
+      "ingredients":"mozzarella, prawn, olives, capers, fresh tomato",
       "title":"Gamberi"
+    },
+    {
+      "ingredients":"Tomato, Mozzarella, Mild salami, Onion, Sundried tomato, Gorgonzola",
+      "title":"Yuri"
+    },
+    {
+      "ingredients":"Tomato, Prosciuitto, Burrata, Cherry tomato",
+      "title":"La Rosa"
     }
   ],
   [

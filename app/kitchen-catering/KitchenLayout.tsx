@@ -1,6 +1,9 @@
+"use client"
+
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { scrollToElement } from '../utils/scrollToElement'
 
 type Props = {
   children: React.ReactNode,
@@ -12,6 +15,14 @@ type Props = {
 }
 
 export default function KitchenLayout({children, heroImage="/wep_files/placeholder-food.webp", title="Kitchen Catering", subtitle="", ctaLabel, ctaHref}:Props){
+  const handleCtaClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    if (!ctaHref?.startsWith("#")) return
+
+    if (scrollToElement(ctaHref.slice(1))) {
+      event.preventDefault()
+    }
+  }
+
   return (
     <main className="bg-amber-50 text-stone-900 min-h-screen">
       <section className="relative w-full h-56 sm:h-72 md:h-96 bg-stone-800">
@@ -23,7 +34,7 @@ export default function KitchenLayout({children, heroImage="/wep_files/placehold
             {subtitle ? <p className="mt-2 text-sm sm:text-base md:text-lg text-amber-100">{subtitle}</p> : null}
             {ctaLabel && ctaHref ? (
               <div className="mt-4">
-                <Link href={ctaHref} className="inline-flex items-center bg-amber-600 hover:bg-amber-500 transition-colors text-white px-4 py-2 sm:px-5 sm:py-3 rounded-lg font-medium">
+                <Link href={ctaHref} onClick={handleCtaClick} className="inline-flex items-center bg-amber-600 hover:bg-amber-500 transition-colors text-white px-4 py-2 sm:px-5 sm:py-3 rounded-lg font-medium">
                   {ctaLabel}
                 </Link>
               </div>

@@ -1,12 +1,12 @@
 "use client"
 import React, { useState } from 'react'
+import Image from 'next/image'
 import { useCart } from './CartProvider'
-import { useRouter } from 'next/navigation'
+import { scrollToElement } from '../utils/scrollToElement'
 
 export default function Cart(){
   const {items, increment, decrement, removeItem, totalItems, totalPrice, clear} = useCart()
   const [open, setOpen] = useState(false)
-  const router = useRouter()
 
   const createSummary = () => {
     let total = 0
@@ -34,9 +34,11 @@ export default function Cart(){
     try{
       const summary = createSummary()
       localStorage.setItem('kitchen_cart_message', summary)
+      localStorage.setItem('kitchen_cart_pack', 'kitchenMenu')
+      window.dispatchEvent(new Event('kitchen-cart-checkout'))
     }catch(e){}
     setOpen(false)
-    router.push('/#contact')
+    scrollToElement('kitchen-form')
   }
 
   return (
@@ -62,22 +64,25 @@ export default function Cart(){
           </div>
           <div className="mt-3 max-h-72 overflow-auto space-y-2">
             {items.map(it => (
-              <div key={String(it.id)} className="flex items-center gap-3 py-2">
-                <div className="w-16 h-14 bg-stone-100 rounded overflow-hidden flex-shrink-0">
-                  {it.image ? <img src={it.image} alt={it.name} className="w-full h-full object-cover" /> : null}
+              <div key={String(it.id)} className="flex-col items-center gap-3 py-2">
+          <div className="flex items-center gap-3 py-2">
+                <div className="w-16 h-14 bg-red-100 rounded overflow-hidden flex-shrink-0">
+                  {it.image ? <Image src={it.image} alt={it.name} width={64} height={56} unoptimized className="w-full h-full object-cover" /> : null}
                 </div>
                 <div className="flex-1">
-                  <div className="text-sm font-medium">{it.name}</div>
+                  <div className="text-sm text-stone-900 font-medium">{it.name}</div>
                   <div className="text-xs text-stone-500">Unit: ${it.price.toFixed(2)}</div>
                   <div className="mt-2 flex items-center gap-2">
                     <button onClick={()=>decrement(it.id)} className="px-2 py-1 bg-stone-200 rounded">-</button>
-                    <div className="px-2">{it.qty}</div>
+                    <div className="min-w-[2rem] px-2 text-center  text-stone-500">{it.qty}</div>
                     <button onClick={()=>increment(it.id)} className="px-2 py-1 bg-stone-200 rounded">+</button>
                   </div>
                 </div>
                 <div className="text-sm font-semibold">${(it.price * it.qty).toFixed(2)}</div>
                 <button onClick={()=>removeItem(it.id)} className="text-sm text-rose-600">Remove</button>
               </div>
+
+</div>
             ))}
           </div>
           <div className="mt-4 border-t pt-3">
@@ -124,14 +129,14 @@ export default function Cart(){
                 items.map(it => (
                   <div key={String(it.id)} className="flex items-center gap-3 py-2">
                     <div className="w-12 h-10 bg-stone-100 rounded overflow-hidden flex-shrink-0">
-                      {it.image ? <img src={it.image} alt={it.name} className="w-full h-full object-cover" /> : null}
+                      {it.image ? <Image src={it.image} alt={it.name} width={48} height={40} unoptimized className="w-full h-full object-cover" /> : null}
                     </div>
                     <div className="flex-1">
-                      <div className="text-sm font-medium">{it.name}</div>
+                      <div className="text-sm text-stone-900 font-medium">{it.name}</div>
                       <div className="text-xs text-stone-500">Unit: ${it.price.toFixed(2)}</div>
                       <div className="mt-2 flex items-center gap-2">
                         <button onClick={()=>decrement(it.id)} className="px-2 py-1 bg-stone-200 rounded">-</button>
-                        <div className="px-2">{it.qty}</div>
+                        <div className="min-w-[2rem] px-2 text-center font-black text-stone-900">{it.qty}</div>
                         <button onClick={()=>increment(it.id)} className="px-2 py-1 bg-stone-200 rounded">+</button>
                       </div>
                     </div>
@@ -155,4 +160,3 @@ export default function Cart(){
     </>
   )
 }
-

@@ -1,10 +1,10 @@
 import React from "react";
-import Image from 'next/image'
 import CateringNavbar from "../componenta/CateringNavbar";
 import KitchenLayout from "./KitchenLayout";
 import CartProvider from '../componenta/CartProvider'
 import Cart from '../componenta/Cart'
 import DishList from './DishList'
+import WrappedForm from '../componenta/wrapped/WrappedForm'
 
 export const dynamic = 'force-dynamic'
 
@@ -15,26 +15,18 @@ const getKitchen = async () => {
   return await res.json();
 };
 
-const getLinkData = async () => {
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL ?? "";
-  const base = apiUrl ? apiUrl : "";
-  const res = await fetch(base + "/api/nav_data", { next: { revalidate: 36 } });
-  return await res.json();
-};
-
 export default async function KitchenCateringPage() {
   const items = await getKitchen();
   const byCat: Record<string, any[]> = {};
   (items || []).forEach((it: any) => {
     (byCat[it.category] ||= []).push(it);
   });
-  const links = await getLinkData();
 
   return (
     <>
       <CateringNavbar />
       <CartProvider>
-      <KitchenLayout heroImage={'/wep_files/kitchen-hero.jpg'} title={'Kitchen Catering'} subtitle={'Our expanded kitchen catering menu — same quality, different offering.'} ctaLabel={'Book Catering'} ctaHref={'/contact'}>
+      <KitchenLayout heroImage={'/chef2.webp'} title={'Kitchen Catering'} subtitle={'Our expanded kitchen catering menu — same quality, different offering.'} ctaLabel={'Book Catering'} ctaHref={'#kitchen-form'}>
         <DishList byCat={byCat} />
 
         {/* Landing: Features */}
@@ -70,13 +62,23 @@ export default async function KitchenCateringPage() {
         </section> */}
 
         {/* CTA strip */}
-        <section className="mt-12 bg-amber-700 text-white rounded-lg p-8 text-center">
+        {/* <section className="mt-12 bg-amber-700 text-white rounded-lg p-8 text-center">
           <h3 className="text-2xl font-semibold">Ready to book your event?</h3>
           <p className="mt-2">Get a customised quote for your date and guest count.</p>
           <div className="mt-4">
             <a href="/#contact" className="inline-block bg-white text-amber-700 px-6 py-3 rounded-lg font-semibold">Request a Quote</a>
           </div>
-        </section>
+        </section> */}
+
+        <WrappedForm
+          formId="kitchen-form"
+          defaultPackageValue="kitchenMenu"
+          hidePackageSelector
+          packageOptions={[
+            { value: 'kitchenMenu', label: 'Kitchen Menu' },
+            { value: 'specialPack', label: 'Special Pack' }
+          ]}
+        />
 
       </KitchenLayout>
       <Cart />
