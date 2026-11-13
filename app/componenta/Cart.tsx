@@ -73,9 +73,9 @@ export default function Cart(){
                   <div className="text-sm text-stone-900 font-medium">{it.name}</div>
                   <div className="text-xs text-stone-500">Unit: ${it.price.toFixed(2)}</div>
                   <div className="mt-2 flex items-center gap-2">
-                    <button onClick={()=>decrement(it.id)} className="px-2 py-1 bg-stone-200 rounded">-</button>
+                    <button onClick={()=>decrement(it.id)} className="px-2 py-1 bg-red-300 rounded">-</button>
                     <div className="min-w-[2rem] px-2 text-center  text-stone-500">{it.qty}</div>
-                    <button onClick={()=>increment(it.id)} className="px-2 py-1 bg-stone-200 rounded">+</button>
+                    <button onClick={()=>increment(it.id)} className="px-2 py-1 bg-emerald-400 rounded">+</button>
                   </div>
                 </div>
                 <div className="text-sm font-semibold">${(it.price * it.qty).toFixed(2)}</div>
@@ -122,7 +122,12 @@ export default function Cart(){
           <div className="relative w-full bg-white rounded-t-xl p-4 max-h-[70vh] overflow-auto">
             <div className="flex items-center justify-between">
               <h4 className="font-semibold">Cart ({totalItems})</h4>
-              <button onClick={() => setOpen(false)} className="text-sm text-stone-500">Close</button>
+              <div className="flex items-center gap-4">
+                {items.length > 0 && (
+                  <button onClick={clear} className="text-sm text-rose-600">Clear</button>
+                )}
+                <button onClick={() => setOpen(false)} className="text-sm text-stone-500">Close</button>
+              </div>
             </div>
             <div className="mt-3 space-y-3">
               {items.length === 0 ? <p className="text-sm text-stone-500">No items</p> : (
@@ -132,12 +137,15 @@ export default function Cart(){
                       {it.image ? <Image src={it.image} alt={it.name} width={48} height={40} unoptimized className="w-full h-full object-cover" /> : null}
                     </div>
                     <div className="flex-1">
-                      <div className="text-sm text-stone-900 font-medium">{it.name}</div>
+                      <div className="flex items-start justify-between gap-2">
+                        <div className="text-sm text-stone-900 font-medium">{it.name}</div>
+                        <button onClick={()=>removeItem(it.id)} className="text-sm text-rose-600">Remove</button>
+                      </div>
                       <div className="text-xs text-stone-500">Unit: ${it.price.toFixed(2)}</div>
                       <div className="mt-2 flex items-center gap-2">
-                        <button onClick={()=>decrement(it.id)} className="px-2 py-1 bg-stone-200 rounded">-</button>
+                        <button onClick={()=>decrement(it.id)} className="px-2 py-1 bg-red-400 rounded">-</button>
                         <div className="min-w-[2rem] px-2 text-center font-black text-stone-900">{it.qty}</div>
-                        <button onClick={()=>increment(it.id)} className="px-2 py-1 bg-stone-200 rounded">+</button>
+                        <button onClick={()=>increment(it.id)} className="px-2 py-1 bg-emerald-400 rounded">+</button>
                       </div>
                     </div>
                     <div className="text-sm font-semibold">${(it.price * it.qty).toFixed(2)}</div>
